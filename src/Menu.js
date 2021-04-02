@@ -10,30 +10,30 @@ class Menu extends React.Component {
         this.state = {
             data: ''
         }
-        this.getTrainingInfo = this.getTrainingInfo.bind(this)
+        this.getTrainingImage = this.getTrainingImage.bind(this)
     }
 
-    getTrainingInfo(){
+    getTrainingImage(){
         const url = 'http://localhost:8080/menu'
-
-        axios.post(url).then((res) => {
+        axios.post(url)
+        .then((res) => {
             this.setState({ data: res.data })
-            // console.log(res.data)
-            // console.log(res.data[1])
-            // console.log(res.data[2])
-            // console.log(res.data[3])
-            // console.log(res.data[4])
+            console.log("console.log....", res.data)
         })
+        .catch((err) => {
+            console.log(err)
+        })
+        console.log("Get Req Start !!!")
     }
 
     render(){
         return (
             <div>
                 <p>Menuページ</p>
-                <button onClick={this.getTrainingInfo}>create menu</button>
+                <button onClick={this.getTrainingImage}>create menu</button>
                 {/* <p>{this.state}</p> */}
                 <img src={`data:image/jpeg;base64,${this.state.data}`} style={{ width: '300px' }}/>
-                <Carousel>
+                {/* <Carousel>
                     <div>
                         <img src="assets/1.jpeg" />
                         <p className="legend">Legend 1</p>
@@ -46,7 +46,7 @@ class Menu extends React.Component {
                         <img src="assets/3.jpeg" />
                         <p className="legend">Legend 3</p>
                     </div>
-                </Carousel>
+                </Carousel> */}
             </div>
         )
     }

@@ -26,6 +26,6 @@ exports.getRamdomData = (NumArray) => {
             }
         })
     }
-    console.log(ramdomDatas)
+    // console.log(ramdomDatas)
     return ramdomDatas
 }
