@@ -5,16 +5,20 @@ const dbClient = require('./testdbClient')
 const S3 = require('./s3')
 const gF = require('./generalFunctions')
 
-const count = dbClient.count()
-const ramdomNums = gF.getRamdomNums(count, 5)
-const ramdomDatas = dbClient.getRamdomData(ramdomNums)
-
 app.use(cors({ origin: true, credentials: false }))
 
 app.post('/menu', async(req, res) => {
-    const array64 = await S3.getBase64Array(ramdomDatas)
-    console.log(array64)
-    res.send(array64)
+    const count = dbClient.count()
+    const ramdomNums = gF.getUniqueNums(count, 5)
+    const ramdomDatas = dbClient.getRamdomData(ramdomNums)
+
+    const ramDataAndBase64Array = await Promise.all([
+        gF.replaceRangeCount(ramdomDatas),
+        S3.getBase64Array(ramdomDatas)
+    ])
+
+    const preparedData = gF.prepareToResponce(ramDataAndBase64Array)
+    res.send(preparedData[0])
 })
 
 app.listen(8080, ()=> {

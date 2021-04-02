@@ -25,9 +25,8 @@ exports.getBase64Array = async(ramdomObject) => {
             // Promise.allで並列に処理するために、asyncGetObjectをpending状態で配列に格納している
             ramdomObject.forEach(element => {
                 params.Key = element.filename
-                const data = this.asyncGetObject(params)
-                pendingFunc.push(data)
-            });
+                pendingFunc.push(this.asyncGetObject(params))
+            })
             Promise.all(pendingFunc)
             .then(
                 result => {

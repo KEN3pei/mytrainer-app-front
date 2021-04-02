@@ -1,14 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios';
-import { Carousel } from 'react-responsive-carousel';
-
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "./index.css";
+// FIXME 後々Hookを利用するように書き方を変える
 class Menu extends React.Component {
 
     constructor(props){
         super(props)
         this.state = {
-            data: ''
+            data: ""
         }
         this.getTrainingImage = this.getTrainingImage.bind(this)
     }
@@ -27,26 +30,35 @@ class Menu extends React.Component {
     }
 
     render(){
+        const Menu = <p>Menuページ</p>
+        let base64ListItems = ""       
+        if(this.state.data.length !== 0){
+            base64ListItems = this.state.data.map((imgData) => 
+                <div key={imgData.id} className="image-contents">
+                    <p>Name : {imgData.name}</p>
+                    <p>Count : {imgData.range}</p>
+                    <img src={`data:image/jpeg;base64,${imgData.data}`} style={{ width: '300px' }}/>
+                 </div>
+            )
+        }
+        const settings = {
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1
+          };
+
         return (
             <div>
-                <p>Menuページ</p>
+                {Menu}
                 <button onClick={this.getTrainingImage}>create menu</button>
-                {/* <p>{this.state}</p> */}
-                <img src={`data:image/jpeg;base64,${this.state.data}`} style={{ width: '300px' }}/>
-                {/* <Carousel>
-                    <div>
-                        <img src="assets/1.jpeg" />
-                        <p className="legend">Legend 1</p>
-                    </div>
-                    <div>
-                        <img src="assets/2.jpeg" />
-                        <p className="legend">Legend 2</p>
-                    </div>
-                    <div>
-                        <img src="assets/3.jpeg" />
-                        <p className="legend">Legend 3</p>
-                    </div>
-                </Carousel> */}
+                {/* mapメソッドでroop処理を行う */}
+                {/* {base64ListItems} */}
+                
+                <Slider {...settings}>
+                {base64ListItems}
+                </Slider>
             </div>
         )
     }

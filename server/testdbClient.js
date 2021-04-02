@@ -1,13 +1,13 @@
-exports.testData = require('../database/test-data.json')
-
+const gF = require('./generalFunctions')
+const testData = require('../database/test-data.json')
 /**
  * @param {Object} testData
  * @returns {Number} num
  */
 exports.count = () => {
-    const data = exports.testData
+    const data = testData
     const count = Object.keys(data).length
-    // console.log(count)
+    // console.log(testData)
     return count
 }
 
@@ -18,14 +18,14 @@ exports.count = () => {
  */
 exports.getRamdomData = (NumArray) => {
     const ramdomDatas = []
+    const dataArray = testData.slice()
     for(let i = 0; i < NumArray.length; i++){
-        exports.testData.forEach((object) => {
+        dataArray.forEach((object) => {
             if(Number(object.id) === NumArray[i]){
                 ramdomDatas.push(object)
                 return 
             }
         })
     }
-    // console.log(ramdomDatas)
     return ramdomDatas
 }
