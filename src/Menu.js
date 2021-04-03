@@ -27,9 +27,9 @@ class Menu extends React.Component {
         if(this.props.location.state){
             base64ListItems = this.props.location.state.data.map((imgData) => 
                 <div key={imgData.id} className="image-contents">
-                    <p>Name : {imgData.name}</p>
-                    <p>Count : {imgData.range}</p>
                     <img src={`data:image/jpeg;base64,${imgData.data}`}/>
+                    <p>{imgData.name}</p>
+                    <p>Count : {imgData.range}</p>
                  </div>
             )
         }else{
