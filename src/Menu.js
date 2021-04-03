@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios';
 import Slider from "react-slick";
+import { Button } from '@material-ui/core'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./index.css";
@@ -13,34 +14,27 @@ class Menu extends React.Component {
         this.state = {
             data: ""
         }
-        this.getTrainingImage = this.getTrainingImage.bind(this)
+        this.handleClick = this.handleClick.bind(this)
     }
 
-    getTrainingImage(){
-        const url = 'http://localhost:8080/menu'
-        axios.post(url)
-        .then((res) => {
-            this.setState({ data: res.data })
-            console.log("console.log....", res.data)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-        console.log("Get Req Start !!!")
+    handleClick(){
+        this.props.history.push('/')
     }
 
     render(){
-        const Menu = <p>Menuページ</p>
-        let base64ListItems = ""       
-        if(this.state.data.length !== 0){
-            base64ListItems = this.state.data.map((imgData) => 
+        let base64ListItems = ""   
+        // console.log(this.props.location.state)   
+        if(this.props.location.state){
+            base64ListItems = this.props.location.state.data.map((imgData) => 
                 <div key={imgData.id} className="image-contents">
                     <p>Name : {imgData.name}</p>
                     <p>Count : {imgData.range}</p>
-                    <img src={`data:image/jpeg;base64,${imgData.data}`} style={{ width: '300px' }}/>
+                    <img src={`data:image/jpeg;base64,${imgData.data}`}/>
                  </div>
             )
-        }
+        }else{
+            this.props.history.push('/')
+        } 
         const settings = {
             dots: true,
             infinite: true,
@@ -51,14 +45,15 @@ class Menu extends React.Component {
 
         return (
             <div>
-                {Menu}
-                <button onClick={this.getTrainingImage}>create menu</button>
+                <Button color="primary" onClick={this.handleClick} >
+                    Topページへ
+                </Button>
                 {/* mapメソッドでroop処理を行う */}
                 {/* {base64ListItems} */}
-                
                 <Slider {...settings}>
                 {base64ListItems}
                 </Slider>
+                {/* <button onClick={this.getTrainingImage}>create menu</button> */}
             </div>
         )
     }
