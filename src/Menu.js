@@ -33,6 +33,7 @@ class Menu extends React.Component {
                  </div>
             )
         }else{
+            // もしstateを失っていたらtopページに飛ばす
             this.props.history.push('/')
         } 
         const settings = {

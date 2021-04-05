@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const dbClient = require('./testdbClient')
+// const dbClient = require('./mongodbClient')
 const S3 = require('./s3')
 const gF = require('./generalFunctions')
 
