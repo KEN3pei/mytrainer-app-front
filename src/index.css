@@ -1,14 +1,19 @@
+body {
+    background-color: #010101;
+    color: #fff;
+}
 .image-contents {
     text-align: center;
 }
 .image-contents img {
     margin: 0 auto;
-    /* height: 500px; */
-    height: 360px;
-    width: 100%;
+    height: 250px;
+    width: 250px;
     object-fit: cover;
     object-position: 30% 100%;
     border-radius: 50%;
+    border: 5px solid #fff;
+    box-shadow: 0 0 50px #668ad8;
 }
 #menu {
     text-align: center;
@@ -25,4 +30,11 @@
 .top-material-button {
     padding: 40px !important;
     border: 1px solid !important;
+}
+
+.slick-dots li button:before {
+    color: #fff !important;
+}
+.slick-arrow {
+    display: none !important;
 }
