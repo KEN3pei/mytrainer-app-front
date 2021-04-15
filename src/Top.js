@@ -42,7 +42,7 @@ class Top extends React.Component {
         const Style = {
             backgroundImage:`url(${bgImage})`,
             backgroundSize: 'cover',
-            height: '100vh',
+            height: '97vh',
             backgroundColor: "rgba(255,255,255,0.6)",
             backgroundBlendMode: 'lighten',
             backgroundPosition: 'center'
